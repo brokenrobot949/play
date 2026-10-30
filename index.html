@@ -137,6 +137,10 @@
     border-radius: 999px;
   }
 
+  .soon { opacity: 0.6; }
+  .soon:hover { transform: none; box-shadow: none; border-color: var(--card-edge); }
+  .soon .play { background: transparent; color: var(--c); border: 1px dashed var(--c); }
+
   footer {
     text-align: center;
     color: var(--muted);
@@ -194,13 +198,48 @@
       url: "https://brokenrobot949.github.io/demonwake/",
       color: "#ff6b6b",
     },
+    {
+      name: "Infernus",
+      genre: "Dark fantasy",
+      blurb: "A dark star fell and split the earth open. Descend.",
+      url: "https://brokenrobot949.github.io/infernus/",
+      color: "#ff7a3d",
+    },
+    {
+      name: "Banner & Keep",
+      genre: "Fantasy strategy",
+      blurb: "Lead your heroes out from the keep. Wounds heal, but the scars stay with them.",
+      url: "https://brokenrobot949.github.io/BANNERandKEEP/",
+      color: "#c9a227",
+    },
+    {
+      name: "Endless Arena",
+      genre: "Arena battler",
+      blurb: "Choose from over twenty battle classes and see how long you last in the arena.",
+      url: "https://brokenrobot949.github.io/arena/",
+      color: "#4f7bff",
+    },
+    {
+      name: "LFG — Guildmaster",
+      genre: "Idle guild sim",
+      blurb: "Build a guild of adventurers that keeps going while you're away.",
+      url: "https://brokenrobot949.github.io/lfg/",
+      color: "#b884d8",
+    },
+    {
+      // No url yet, so the card shows "Coming soon" instead of a Play button.
+      name: "Adventure Index",
+      genre: "Coming soon",
+      blurb: "A new adventure in the works.",
+      color: "#5fbfa8",
+    },
   ];
 
   const grid = document.getElementById("games");
   for (const g of GAMES) {
-    const card = document.createElement("a");
-    card.className = "game";
-    card.href = g.url;
+    const card = document.createElement(g.url ? "a" : "div");
+    card.className = g.url ? "game" : "game soon";
+    if (g.url) card.href = g.url;
     card.style.setProperty("--c", g.color);
 
     const icon = document.createElement("div");
@@ -218,7 +257,7 @@
       <h2></h2>
       <div class="genre"></div>
       <p></p>
-      <span class="play">Play &rarr;</span>`);
+      <span class="play">${g.url ? "Play &rarr;" : "Coming soon"}</span>`);
     card.querySelector("h2").textContent = g.name;
     card.querySelector(".genre").textContent = g.genre;
     card.querySelector("p").textContent = g.blurb;
